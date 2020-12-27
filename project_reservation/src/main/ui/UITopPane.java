@@ -40,7 +40,7 @@ public class UITopPane extends JPanel {
         topPanel.setPreferredSize(new Dimension(600, 300));
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
         topPanel.setBackground(new Color(227, 227, 101));
-        ShowImage image = new ShowImage("./src/main/ui/bkg.jpg");
+        ShowImage image = new ShowImage("./project_reservation/src/main/ui/bkg.jpg");
         topPanel.add(image);
 
         this.dayReservation = reservation;

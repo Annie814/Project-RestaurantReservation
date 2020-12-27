@@ -10,7 +10,7 @@ import java.io.IOException;
 
 // This class is to perform the load data function of in the gui.
 public class LoadListener implements ActionListener {
-    private static final String JSON_STORE = "./data/dayreservation.json";
+    private static final String JSON_STORE = "./project_reservation/data/dayreservation.json";
     public DayReservation dayReservation;
     private JsonReader jsonReader;
 

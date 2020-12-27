@@ -1,19 +1,16 @@
 package ui;
 
 import model.DayReservation;
-import persistence.JsonReader;
 import persistence.JsonWriter;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
-import java.util.Scanner;
 
 // This class is to perform the save data function of in the gui.
 public class SaveListener implements ActionListener {
-    public static final String JSON_STORE = "./data/dayreservation.json";
+    public static final String JSON_STORE = "./project_reservation/data/dayreservation.json";
     private DayReservation dayReservation;
     private JsonWriter jsonWriter;
     private JButton button;
