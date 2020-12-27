@@ -1,0 +1,17 @@
+{
+  "date": "2020-10-27",
+  "customers": [
+    {
+      "bookedtime": 11.3,
+      "phonenum": "5349870987",
+      "customername": "Marry",
+      "partysize": 4
+    },
+    {
+      "bookedtime": 10,
+      "phonenum": "12345678",
+      "customername": "Tim",
+      "partysize": 2
+    }
+  ]
+}

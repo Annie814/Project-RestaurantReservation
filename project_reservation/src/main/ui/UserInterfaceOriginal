@@ -1,0 +1,193 @@
+//package ui;
+//
+//import model.DayReservation;
+//
+//import javax.swing.*;
+//import javax.swing.event.ListSelectionEvent;
+//import javax.swing.event.ListSelectionListener;
+//import java.awt.*;
+//import java.time.LocalDate;
+//import java.util.Scanner;
+//
+//// the implementation for split panel is referred to
+//// https://stackoverflow.com/questions/15694107/how-to-layout-multiple-panels-on-a-jframe-java
+//
+//public class UserInterface extends JFrame implements ListSelectionListener {
+//
+//
+//    // these are the components we need.
+//    protected JList reservationlist;
+//    private DayReservation resV;
+//    private final JSplitPane splitPane;  // split the window in top and bottom
+//    private final JPanel topPanel;       // container panel for the top
+//    private final JPanel bottomPanel;    // container panel for the bottom
+//    private final JScrollPane scrollPane; // makes the text scrollable
+//    private final JTextArea textArea;     // the text
+//    private final JLabel labelDate;     // the text
+//    private final JPanel inputPanel1;      // under the text a container for all the input elements
+//    private final JPanel inputPanel2;      // under the text a container for all the input elements
+//    private final JPanel inputPanel3;      // under the text a container for all the input elements
+//    private final JPanel inputPanel4;      // under the text a container for all the input elements
+//    private final JPanel buttonPanel;
+//    protected final JTextField nameInput;   // a textField for the text the user inputs
+//    protected final JTextField phoneInput;
+//    protected final JTextField timeInput;
+//    protected final JTextField partysizeInput;
+//    private final JLabel label1;
+//    private final JLabel label2;
+//    private final JLabel label3;
+//    private final JLabel label4;
+//    private final JButton bottonAdd;
+//    private final JButton bottonVerify;
+//    private final JButton bottonChange;
+//    private LocalDate date;
+//    protected DayReservation dayReservation;
+//
+//
+//    public UserInterface() {
+//        // first, lets create the containers:
+//        // the splitPane devides the window in two components (here: top and bottom)
+//        // users can then move the devider and decide how much of the top component
+//        // and how much of the bottom component they want to see.
+//        splitPane = new JSplitPane();
+//
+//        topPanel = new JPanel();         // our top component
+//        bottomPanel = new JPanel();      // our bottom component
+//
+//        // in our bottom panel we want the text area and the input components
+//        scrollPane = new JScrollPane();  // this scrollPane is used to make the text area scrollable
+//        textArea = new JTextArea();      // this text area will be put inside the scrollPane
+//
+//        // top panel: 1 textfield, 4 input panels, 1 horizontal arranged 3 bottons.
+//        // the input components will be put in a separate panel
+//        labelDate = new JLabel("\nToday is " + 11.09
+//                + ". How can I assist you for today's reservation?");
+//        inputPanel1 = new JPanel();
+//        inputPanel2 = new JPanel();
+//        inputPanel3 = new JPanel();
+//        inputPanel4 = new JPanel();
+//        buttonPanel = new JPanel();
+//        label1 = new JLabel("Customer Name");
+//        label2 = new JLabel("Phone #");
+//        label3 = new JLabel("Booking Time");
+//        label4 = new JLabel("Party Size");
+//        nameInput = new JTextField(150);    // first the input field where the user can type his text
+//        phoneInput = new JTextField(150);
+//        timeInput = new JTextField(150);
+//        partysizeInput = new JTextField(150);
+//        bottonAdd = new JButton("Add");
+//        bottonVerify = new JButton("Verify");
+//        bottonChange = new JButton("Change");
+//
+//        // now lets define the default size of our window and its layout:
+//        setPreferredSize(new Dimension(600, 600));     // let's open the window with a default size of 400x400 pixels
+//        // the contentPane is the container that holds all our components
+//        getContentPane().setLayout(new GridLayout());  // the default GridLayout is like a grid with 1 column and 1 row,
+//        // we only add one element to the window itself
+//        getContentPane().add(splitPane);               // due to the GridLayout, our splitPane will now fill the whole window
+//
+//        // configure splitPane:
+//        splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);  // we want it to split the window verticaly
+//        splitPane.setDividerLocation(300);                    // the initial position of the divider is 200 (our window is 400 pixels high)
+//        splitPane.setTopComponent(topPanel);                  // at the top we want our "topPanel"
+//        splitPane.setBottomComponent(bottomPanel);            // and at the bottom we want our "bottomPanel"
+//
+//        //topPanel
+//
+//        //Lay out the input from top to down.
+//
+//        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS)); // BoxLayout.Y_AXIS will arrange the content vertically
+//
+//        inputPanel1.setMaximumSize(new Dimension(300, 20));     // we set the max height to 75 and the max width to (almost) unlimited
+//        inputPanel1.setLayout(new BoxLayout(inputPanel1, BoxLayout.X_AXIS));
+//        inputPanel1.add(label1);            // left will be label
+//        inputPanel1.add(nameInput);        // right will be the textField
+//
+//        inputPanel2.setMaximumSize(new Dimension(300, 20));
+//        inputPanel2.setLayout(new BoxLayout(inputPanel2, BoxLayout.X_AXIS));   // X_Axis will arrange the content horizontally
+//        inputPanel2.add(label2);            // left will be label
+//        inputPanel2.add(phoneInput);        // right will be the textField
+//
+//        inputPanel3.setMaximumSize(new Dimension(300, 20));     // we set the max height to 75 and the max width to (almost) unlimited
+//        inputPanel3.setLayout(new BoxLayout(inputPanel3, BoxLayout.X_AXIS));
+//        inputPanel3.add(label3);            // left will be label
+//        inputPanel3.add(timeInput);        // right will be the textField
+//
+//        inputPanel4.setMaximumSize(new Dimension(300, 20));     // we set the max height to 75 and the max width to (almost) unlimited
+//        inputPanel4.setLayout(new BoxLayout(inputPanel4, BoxLayout.X_AXIS));
+//        inputPanel4.add(label4);            // left will be label
+//        inputPanel4.add(partysizeInput);        // right will be the textField
+//
+//        topPanel.add(labelDate);
+//
+//        topPanel.add(inputPanel1);
+//        topPanel.add(inputPanel2);
+//        topPanel.add(inputPanel3);
+//        topPanel.add(inputPanel4);
+//
+//        topPanel.add(buttonPanel);
+//
+//        //Lay out the buttons from left to right.
+//        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+//        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+//        buttonPanel.add(Box.createHorizontalGlue());
+//        buttonPanel.add(bottonAdd);
+//        buttonPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+//        buttonPanel.add(bottonVerify);
+//        buttonPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+//        buttonPanel.add(bottonChange);
+//        //bottomPanel
+//
+//        //Create the Dayreservation and put it in a scroll pane.
+//
+//        init();
+//
+//        reservationlist = new JList((ListModel) dayReservation);
+//        reservationlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//        reservationlist.setSelectedIndex(0);
+//        reservationlist.addListSelectionListener(this);
+//        reservationlist.setVisibleRowCount(5);
+//        JScrollPane scrollPane = new JScrollPane(reservationlist);
+//
+//        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.Y_AXIS)); // BoxLayout.Y_AXIS will arrange the content vertically
+//
+//        bottomPanel.add(scrollPane);                // first we add the scrollPane to the bottomPanel, so it is at the top
+//        scrollPane.setViewportView(textArea);       // the scrollPane should make the textArea scrollable, so we define the viewport
+//        // let's set the maximum size of the inputPanel, so it doesn't get too big when the user resizes the window
+//
+//
+//        pack();   // calling pack() at the end, will ensure that every layout and size we just defined gets applied before the stuff becomes visible
+//
+//        // set up listener
+//        bottonAdd.setActionCommand("add");
+//        bottonAdd.addActionListener(new AddListener(bottonAdd));
+//        bottonVerify.setActionCommand("change");
+//        bottonVerify.addActionListener(new VerifyListener(bottonVerify));
+//        bottonChange.setActionCommand("change");
+//        bottonChange.addActionListener(new ChangeListener(bottonChange));
+//
+//    }
+//
+//    private void init() {
+//        date = LocalDate.of(2020, 10, 22);
+//        dayReservation = new DayReservation(date);
+////     //   jsonWriter = new JsonWriter(JSON_STORE);
+////     //   jsonReader = new JsonReader(JSON_STORE);
+//    }
+//
+//    @Override
+//    public void valueChanged(ListSelectionEvent e) {
+//
+//    }
+//}
+//
+//
+////    public static void main(String args[]){
+////        EventQueue.invokeLater(new Runnable(){
+////            @Override
+////            public void run(){
+////                new UserInterface().setVisible(true);
+////            }
+////        });
+////    }
+////}

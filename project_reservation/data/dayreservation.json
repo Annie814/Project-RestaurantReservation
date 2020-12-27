@@ -1,0 +1,9 @@
+{
+    "date": "2021-01-01",
+    "customers": [{
+        "bookedtime": 11,
+        "phonenum": "123123",
+        "customername": "aaa",
+        "partysize": 2
+    }]
+}
